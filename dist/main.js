@@ -20,7 +20,7 @@ function bootstrap() {
         app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter(httpRef));
         app.useGlobalPipes(new validation_pipe_1.ValidationPipe());
         app.useGlobalInterceptors(new logging_interceptor_1.LoggingInterceptor());
-        yield app.listen(3000);
+        yield app.listen(3000, '0.0.0.0');
     });
 }
 bootstrap();
