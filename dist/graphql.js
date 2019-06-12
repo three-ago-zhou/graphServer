@@ -1,14 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+class CreateArticleTypeInput {
+}
+exports.CreateArticleTypeInput = CreateArticleTypeInput;
 class CreateUserInput {
 }
 exports.CreateUserInput = CreateUserInput;
-class Message {
+class NewArticleInput {
 }
-exports.Message = Message;
-class MessageAll {
+exports.NewArticleInput = NewArticleInput;
+class UpdateArticleInput {
 }
-exports.MessageAll = MessageAll;
+exports.UpdateArticleInput = UpdateArticleInput;
+class UpdateArticleTypeInput {
+}
+exports.UpdateArticleTypeInput = UpdateArticleTypeInput;
+class UpdateUserInput {
+}
+exports.UpdateUserInput = UpdateUserInput;
+class Article {
+}
+exports.Article = Article;
+class ArticleType {
+}
+exports.ArticleType = ArticleType;
 class IMutation {
 }
 exports.IMutation = IMutation;

@@ -22,65 +22,89 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
-const graphql_subscriptions_1 = require("graphql-subscriptions");
+const user_1 = require("./models/user");
 const user_guard_1 = require("./user.guard");
 const user_service_1 = require("./user.service");
-const create_user_dto_1 = require("./dto/create-user.dto");
-const pubSub = new graphql_subscriptions_1.PubSub();
 let UserResolvers = class UserResolvers {
     constructor(userService) {
         this.userService = userService;
     }
-    getUsers() {
+    findUser(_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.findAll();
+            const user = yield this.userService.findUser(_id);
+            if (!user) {
+                throw new common_1.NotFoundException('无法查询到用户');
+            }
+            return user;
         });
     }
-    findOneById(id) {
+    findAllUser() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userService.findOneById(id);
+            const users = yield this.userService.findAllUser();
+            return users;
         });
     }
-    create(args) {
+    findUserByAccount(account) {
         return __awaiter(this, void 0, void 0, function* () {
-            const createUser = yield this.userService.create(args);
-            pubSub.publish('userCreated', { userCreated: createUser });
-            return createUser;
+            const user = yield this.userService.findUserByAccount(account);
+            if (!user) {
+                throw new common_1.NotFoundException('无法查询到用户');
+            }
+            return user;
         });
     }
-    userCreated() {
-        return pubSub.asyncIterator('userCreated');
+    updateUser(updateUserInput) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield this.userService.findUser(updateUserInput._id);
+            if (!user) {
+                throw new common_1.NotFoundException('无法查询到用户');
+            }
+            return yield this.userService.updateUser(updateUserInput);
+        });
+    }
+    createUser(createUserInput) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.userService.createUser(createUserInput);
+        });
     }
 };
 __decorate([
-    graphql_1.Query(),
+    graphql_1.Query(returns => user_1.User),
     common_1.UseGuards(user_guard_1.UserGuard),
+    __param(0, graphql_1.Args('_id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolvers.prototype, "findUser", null);
+__decorate([
+    graphql_1.Query(returns => [user_1.User]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UserResolvers.prototype, "getUsers", null);
+], UserResolvers.prototype, "findAllUser", null);
 __decorate([
-    graphql_1.Query('user'),
-    __param(0, graphql_1.Args('id', common_1.ParseIntPipe)),
+    graphql_1.Query(returns => user_1.User),
+    __param(0, graphql_1.Args('account')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UserResolvers.prototype, "findOneById", null);
+], UserResolvers.prototype, "findUserByAccount", null);
 __decorate([
-    graphql_1.Mutation('createUser'),
+    graphql_1.Mutation(returns => user_1.User),
+    __param(0, graphql_1.Args('updateUserInput')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_1.UpdateUserInput]),
+    __metadata("design:returntype", Promise)
+], UserResolvers.prototype, "updateUser", null);
+__decorate([
+    graphql_1.Mutation(returns => user_1.User),
     __param(0, graphql_1.Args('createUserInput')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
+    __metadata("design:paramtypes", [user_1.CreateUserInput]),
     __metadata("design:returntype", Promise)
-], UserResolvers.prototype, "create", null);
-__decorate([
-    graphql_1.Subscription('userCreated'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], UserResolvers.prototype, "userCreated", null);
+], UserResolvers.prototype, "createUser", null);
 UserResolvers = __decorate([
-    graphql_1.Resolver('User'),
+    graphql_1.Resolver(of => user_1.User),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserResolvers);
 exports.UserResolvers = UserResolvers;

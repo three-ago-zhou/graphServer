@@ -1,11 +1,11 @@
-import { User } from '../graphql';
+import { User, UpdateUserInput, CreateUserInput } from './models/user';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 export declare class UserResolvers {
     private readonly userService;
     constructor(userService: UserService);
-    getUsers(): Promise<User[]>;
-    findOneById(id: number): Promise<User>;
-    create(args: CreateUserDto): Promise<User>;
-    userCreated(): AsyncIterator<{}>;
+    findUser(_id: string): Promise<User>;
+    findAllUser(): Promise<User[]>;
+    findUserByAccount(account: string): Promise<User>;
+    updateUser(updateUserInput: UpdateUserInput): Promise<User>;
+    createUser(createUserInput: CreateUserInput): Promise<any>;
 }
