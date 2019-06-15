@@ -9,22 +9,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const graphql_1 = require("@nestjs/graphql");
+const path_1 = require("path");
 const user_module_1 = require("./user/user.module");
 const data_scalar_1 = require("./common/scalars/data.scalar");
 const articleType_module_1 = require("./articleType/articleType.module");
 const article_module_1 = require("./article/article.module");
-const graphql_config_service_1 = require("./configBase/graphql-config.service");
-const mongodb_config_service_1 = require("./configBase/mongodb-config.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
-            typeorm_1.TypeOrmModule.forRootAsync({
-                useClass: mongodb_config_service_1.MongodbConfigService,
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'mongodb',
+                host: '120.27.233.199',
+                port: 27056,
+                database: 'singleBog',
+                username: 'singlebogdbzwh',
+                password: 'zwh19941012',
+                entities: [path_1.join(__dirname, 'entity/**.entity{.ts,.js}')],
+                synchronize: true,
+                useNewUrlParser: true,
             }),
-            graphql_1.GraphQLModule.forRootAsync({
-                useClass: graphql_config_service_1.GraphQlConfigService,
+            graphql_1.GraphQLModule.forRoot({
+                typePaths: ['./**/*.graphql'],
+                installSubscriptionHandlers: true,
+                autoSchemaFile: 'src/schema.gql',
+                definitions: {
+                    path: path_1.join(process.cwd(), 'src/graphql.ts'),
+                    outputAs: 'class',
+                },
             }),
             user_module_1.UserModule,
             articleType_module_1.ArticleTypeModule,
