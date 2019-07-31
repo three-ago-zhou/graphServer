@@ -27,6 +27,8 @@ export class NewArticleInput {
     articleType_id: string;
     user_id: string;
     title: string;
+    bannerImage: string;
+    articleImages: string[];
     description: string;
     links: string[];
 }
@@ -35,6 +37,8 @@ export class UpdateArticleInput {
     _id: string;
     articleType_id: string;
     title: string;
+    bannerImage: string;
+    articleImages: string[];
     description: string;
     links: string[];
 }
@@ -59,6 +63,8 @@ export class UpdateUserInput {
 
 export class Article {
     _id: string;
+    bannerImage: string;
+    articleImages: string[];
     title: string;
     creationDate: Date;
     updateDate: Date;

@@ -6,6 +6,8 @@
 type Article {
   """文章id"""
   _id: ID!
+  bannerImage: String!
+  articleImages: [String!]
   title: String!
   creationDate: Date!
   updateDate: Date!
@@ -71,6 +73,8 @@ input NewArticleInput {
   """用户ID"""
   user_id: ID!
   title: String!
+  bannerImage: String!
+  articleImages: [String!]
   description: String!
   links: [String!]
 }
@@ -97,6 +101,8 @@ input UpdateArticleInput {
   """文章类型ID"""
   articleType_id: ID!
   title: String!
+  bannerImage: String!
+  articleImages: [String!]
   description: String!
   links: [String!]
 }

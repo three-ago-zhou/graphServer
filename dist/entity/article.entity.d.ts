@@ -4,6 +4,8 @@ import { ArticleTypeEntity } from "./articleType.entity";
 export declare class ArticleEntity {
     _id: ObjectID;
     title: string;
+    bannerImage: string;
+    articleImages: string[];
     creationDate: Date;
     updateDate: Date;
     description: string;

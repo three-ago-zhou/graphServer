@@ -3,6 +3,8 @@ import { User } from '../../user/models/user';
 import { ArticleType } from '../../articleType/models/articleType';
 export declare class Article {
     _id: ObjectID;
+    bannerImage: string;
+    articleImages: string[];
     title: string;
     creationDate: Date;
     updateDate: Date;
@@ -16,6 +18,8 @@ export declare class NewArticleInput {
     articleType_id: ObjectID;
     user_id: ObjectID;
     title: string;
+    bannerImage: string;
+    articleImages?: string[];
     description: string;
     links?: string[];
 }
@@ -23,6 +27,8 @@ export declare class UpdateArticleInput {
     _id: ObjectID;
     articleType_id: ObjectID;
     title?: string;
+    bannerImage: string;
+    articleImages?: string[];
     description?: string;
     links?: string[];
 }

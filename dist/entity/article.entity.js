@@ -23,6 +23,14 @@ __decorate([
     __metadata("design:type", String)
 ], ArticleEntity.prototype, "title", void 0);
 __decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], ArticleEntity.prototype, "bannerImage", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", Array)
+], ArticleEntity.prototype, "articleImages", void 0);
+__decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], ArticleEntity.prototype, "creationDate", void 0);

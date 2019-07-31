@@ -12,6 +12,16 @@ export class Article {
   _id: ObjectID;
 
   @Field()
+  @IsOptional()
+  bannerImage: string;
+
+  @Field(type => [String], {
+    nullable: true,
+  })
+  @IsOptional()
+  articleImages: string[];
+
+  @Field()
   title: string;
 
   @Field()
@@ -59,6 +69,15 @@ export class NewArticleInput {
   title: string;
 
   @Field()
+  bannerImage: string;
+
+  @Field(type => [String], {
+    nullable: true,
+  })
+  @IsOptional()
+  articleImages?: string[];
+
+  @Field()
   @Length(30, 255)
   description: string;
 
@@ -84,6 +103,15 @@ export class UpdateArticleInput {
     @Field()
     @Length(1, 100)
     title?: string;
+
+    @Field()
+    bannerImage: string;
+
+    @Field(type => [String], {
+        nullable: true,
+    })
+    @IsOptional()
+    articleImages?: string[];
 
     @Field()
     description?: string;

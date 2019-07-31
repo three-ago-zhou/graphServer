@@ -10,6 +10,12 @@ export class ArticleEntity {
     @Column()
     title: string;
 
+    @Column()
+    bannerImage: string;
+
+    @Column()
+    articleImages: string[];
+
     @CreateDateColumn()
     creationDate: Date;
 

@@ -24,6 +24,18 @@ __decorate([
 ], Article.prototype, "_id", void 0);
 __decorate([
     type_graphql_1.Field(),
+    class_validator_1.IsOptional(),
+    __metadata("design:type", String)
+], Article.prototype, "bannerImage", void 0);
+__decorate([
+    type_graphql_1.Field(type => [String], {
+        nullable: true,
+    }),
+    class_validator_1.IsOptional(),
+    __metadata("design:type", Array)
+], Article.prototype, "articleImages", void 0);
+__decorate([
+    type_graphql_1.Field(),
     __metadata("design:type", String)
 ], Article.prototype, "title", void 0);
 __decorate([
@@ -85,6 +97,17 @@ __decorate([
 ], NewArticleInput.prototype, "title", void 0);
 __decorate([
     type_graphql_1.Field(),
+    __metadata("design:type", String)
+], NewArticleInput.prototype, "bannerImage", void 0);
+__decorate([
+    type_graphql_1.Field(type => [String], {
+        nullable: true,
+    }),
+    class_validator_1.IsOptional(),
+    __metadata("design:type", Array)
+], NewArticleInput.prototype, "articleImages", void 0);
+__decorate([
+    type_graphql_1.Field(),
     class_validator_1.Length(30, 255),
     __metadata("design:type", String)
 ], NewArticleInput.prototype, "description", void 0);
@@ -118,6 +141,17 @@ __decorate([
     class_validator_1.Length(1, 100),
     __metadata("design:type", String)
 ], UpdateArticleInput.prototype, "title", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", String)
+], UpdateArticleInput.prototype, "bannerImage", void 0);
+__decorate([
+    type_graphql_1.Field(type => [String], {
+        nullable: true,
+    }),
+    class_validator_1.IsOptional(),
+    __metadata("design:type", Array)
+], UpdateArticleInput.prototype, "articleImages", void 0);
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
