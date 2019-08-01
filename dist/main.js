@@ -15,7 +15,7 @@ function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = yield core_1.NestFactory.create(app_module_1.AppModule);
         app.useGlobalPipes(new validation_pipe_1.ValidationPipe());
-        yield app.listen(3000, '0.0.0.0');
+        yield app.listen(5658, '0.0.0.0');
     });
 }
 bootstrap();
